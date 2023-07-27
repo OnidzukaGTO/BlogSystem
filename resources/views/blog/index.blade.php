@@ -12,30 +12,8 @@
             </x-button-link>
         </x-slot>
     </x-title>
-    
-    <x-form method="GET" action="{{route('blogs')}}">
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <div class="mb-3">
-                    <x-input name="search" placeholder="{{__('Filter')}}" />
-                </div>
-            </div>
 
-            <div class="col-12 col-md-4">
-                <div class="mb-3">
-                    <x-select name="category_id"  />
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="mb-3">
-                    <x-button type="submit" class="w-100">
-                        {{__('Filtr')}}
-                    </x-button>
-                </div>
-            </div>
-        </div>
-    </x-form>
+    @include('blog.filter')
 
 <div class="text-center">
     @if (empty($blogs))

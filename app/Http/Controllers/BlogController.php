@@ -20,7 +20,7 @@ class BlogController extends Controller
 
         $blogs = array_fill(0,10,$blog);
         $blogs = array_filter($blogs, function ($blog) use ($search, $category_id){
-            if ($search && ! str_contains($blog['title'], $search)) {
+            if ($search && ! str_contains(strtolower($blog['title']), strtolower($search))) {
                 return false;
             }
             if ($category_id && $blog['category_id'] != $category_id) {

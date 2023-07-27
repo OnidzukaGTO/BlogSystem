@@ -1,3 +1,6 @@
 <form {{$attributes}}>
-    @csrf {{$slot}}
+    @if ($attributes["method"] !== "GET")
+        @csrf
+    @endif
+    {{$slot}}
 </form>
