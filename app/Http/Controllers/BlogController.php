@@ -37,8 +37,7 @@ class BlogController extends Controller
         $title = $request->input('title');
         $content = $request->input('content');
 
-        dd($title,$content);
-        return 'Create ok ?';
+        return redirect()->route('blogs.show', 1);
     }
     public function show($blog){
         $blog = [
@@ -57,13 +56,13 @@ class BlogController extends Controller
         ];
         return view('blog.edit', compact('blog'));
     }
-    public function update(Request $request){
+    public function update(Request $request, $blog){
         $title = $request->input('title');
         $content = $request->input('content');
 
-        return 'Update ok ?';
+        return redirect()->back();
     }
-    public function delete(){
-        return 'Blog delete';
+    public function delete($blog){
+        return redirect()->route('blogs');
     }
 }

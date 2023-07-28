@@ -15,5 +15,8 @@
 
     <x-blog.form action="{{route('blog.update', $blog['id'])}}" method="POST" :blog="$blog" >
         @method('PUT')
+        <x-button type="submit">
+            {{ __('Edit blog') }}
+        </x-button>
     </x-blog.form>
 @endsection

@@ -12,5 +12,9 @@
             </a>
         </x-slot>
     </x-title>
-    <x-blog.form action="{{route('blogs.store')}}" />
+    <x-blog.form action="{{route('blogs.store')}}">
+        <x-button type="submit">
+            {{ __('Create blog') }}
+        </x-button>
+    </x-blog.form>
 @endsection

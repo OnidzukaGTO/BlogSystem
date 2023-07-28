@@ -27,7 +27,7 @@
 
             <x-form-item>
                 <x-label require>{{__('Password')}}</x-label>
-                <x-input type="password" name="password" />
+                <x-input type="password" name="password"  />
             </x-form-item>
 
             <x-form-item>

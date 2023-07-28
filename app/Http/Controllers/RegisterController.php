@@ -21,8 +21,12 @@ class RegisterController extends Controller
         $password = $request->input('password');
         $agreement = $request->boolean('agreement');
 
-        //$request->filled('name');
+        //$request->filled('name'); 
+        
+        if (true) {
+            return redirect()->back()->withInput();
+        }
 
-        return 'Запрос';
+        return redirect()->route('blogs');
     }
 }

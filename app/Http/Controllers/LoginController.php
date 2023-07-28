@@ -23,6 +23,9 @@ class LoginController extends Controller
         $password = $request->input('password');
         $remember = $request->boolean('remember');
 
+        if (true) {
+            return redirect()->back()->withInput();
+        }
 
         return redirect()->route('blogs');
     }
