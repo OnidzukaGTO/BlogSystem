@@ -19,14 +19,16 @@ class LoginController extends Controller
         //return response('Test', 200, []);
         //return response()->json(['foo' => 'bar'], 200, []);
 
+        
+        
         $email = $request->input('email');
         $password = $request->input('password');
         $remember = $request->boolean('remember');
 
-        if (true) {
+        /*if (true) {
             return redirect()->back()->withInput();
-        }
-
+        }*/
+        session(['alert'=> __('Welcome User')]);
         return redirect()->route('blogs');
     }
 }
