@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationData;
+use Illuminate\Validation\ValidationException;
 
 class BlogController extends Controller
 {
@@ -34,9 +36,21 @@ class BlogController extends Controller
         return view('blog.create');
     }
     public function store(Request $request){
-        $title = $request->input('title');
-        $content = $request->input('content');
+        //$title = $request->input('title');
+        //$content = $request->input('content');
 
+        $validate=validator($request->all(),[
+            'title' => ['required', 'string','max:100'],
+            'content' => ['required', 'string'],
+        ])->validate();
+       
+        /* if (true) {
+            throw ValidationException::withMessages([
+                'account' => __('Error')
+            ]);
+        }*/
+
+        dd($validate);
         return redirect()->route('blogs.show', 1);
     }
     public function show($blog){
@@ -57,9 +71,12 @@ class BlogController extends Controller
         return view('blog.edit', compact('blog'));
     }
     public function update(Request $request, $blog){
-        $title = $request->input('title');
-        $content = $request->input('content');
+        $validate=validator($request->all(),[
+            'title' => ['required', 'string','max:100'],
+            'content' => ['required', 'string'],
+        ])->validate();
 
+        dd($validate);
         return redirect()->back();
     }
     public function delete($blog){
