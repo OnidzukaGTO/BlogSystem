@@ -12,7 +12,7 @@
             </a>
         </x-slot>
     </x-card-header>
-
+    
     <x-card-body>
         <x-form action="{{route('register.store')}}" method="POST">
             <x-form-item>
@@ -27,12 +27,12 @@
 
             <x-form-item>
                 <x-label require>{{__('Password')}}</x-label>
-                <x-input type="password" name="password"  />
+                <x-input type="password" name="password" />
             </x-form-item>
 
             <x-form-item>
-                <x-label>{{__('Password Confimation')}}</x-label>
-                <x-input type="Password" name="password_confimation" />
+                <x-label>{{__('Password Confirmation')}}</x-label>
+                <x-input type="Password" name="password_confirmation" />
             </x-form-item>
 
             <x-form-item>

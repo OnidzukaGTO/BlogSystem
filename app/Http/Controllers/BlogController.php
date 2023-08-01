@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationData;
 use Illuminate\Validation\ValidationException;
@@ -39,9 +42,11 @@ class BlogController extends Controller
         //$title = $request->input('title');
         //$content = $request->input('content');
 
-        $validate=validator($request->all(),[
+        $validated=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
+            'published_at' => ['nullable', 'string', 'date'],
+            'published' => ['nullable', 'boolean'],
         ])->validate();
        
         /* if (true) {
@@ -50,7 +55,16 @@ class BlogController extends Controller
             ]);
         }*/
 
-        dd($validate);
+        $blog = Blog::query()->firstOrCreate([
+            'user_id' => User::query()->value('id'),
+            'title' => $validated['title'],
+        ], [
+            'content' => $validated['content'],
+            'published_at' => new Carbon($validated['published_at'] ?? null),
+            'published' => $validated['published'] ?? false,
+
+        ]);
+        dd($blog);
         return redirect()->route('blogs.show', 1);
     }
     public function show($blog){
