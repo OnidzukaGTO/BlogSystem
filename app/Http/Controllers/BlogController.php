@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationData;
-use Illuminate\Validation\ValidationException;
 
 class BlogController extends Controller
 {
@@ -16,14 +13,14 @@ class BlogController extends Controller
         $category_id = $request->input('category_id');
 
         //dd($search,$category_id);
-        $blog = [
+        /*$blog = [
             'id' => 1,
             'title' => 'War',
             'content' =>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ad.',
             'category_id' => 1
-        ];
+        ];*/
 
-        $blogs = array_fill(0,10,$blog);
+        /*$blogs = array_fill(0,10,$blog);
         $blogs = array_filter($blogs, function ($blog) use ($search, $category_id){
             if ($search && ! str_contains(strtolower($blog['title']), strtolower($search))) {
                 return false;
@@ -32,7 +29,13 @@ class BlogController extends Controller
                 return false;
             }
             return true;
-        });
+        });*/
+
+        //$blogs = Blog::query()->limit(10)->offset()->get(['id', 'title' , 'published_at']);
+        //$blogs = Blog::query()->paginate(12, ['id', 'title' , 'published_at']); 
+
+        $blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']); //->orderBy('', 'asc/desc')
+
         return view('blog.index', compact('blogs'));
     }
     public function create(){
@@ -55,7 +58,7 @@ class BlogController extends Controller
             ]);
         }*/
 
-        $blog = Blog::query()->firstOrCreate([
+        /*$blog = Blog::query()->firstOrCreate([
             'user_id' => User::query()->value('id'),
             'title' => $validated['title'],
         ], [
@@ -64,7 +67,16 @@ class BlogController extends Controller
             'published' => $validated['published'] ?? false,
 
         ]);
-        dd($blog);
+        dd($blog);*/
+        for ($i=0; $i<99 ; $i++) { 
+            Blog::query()->create([
+                'user_id' => User::query()->value('id'),
+                'title' => fake()->sentence(),
+                'content' => fake()->paragraph(),
+                'published' => true,
+                'published_at' => fake()-> dateTimeBetween(now()->subYear(), now()),
+            ]);
+        }
         return redirect()->route('blogs.show', 1);
     }
     public function show($blog){

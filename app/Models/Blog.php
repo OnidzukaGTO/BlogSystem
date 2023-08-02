@@ -14,7 +14,7 @@ class Blog extends Model
         'user_id', 'title', 'content', 'published','published_at',
     ];
 
-    protected $cats=[
+    protected $casts=[
         'published_at' => 'datetime',
         'published'=> 'boolean',
     ];

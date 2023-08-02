@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,10 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         view()->share('date', 2005);
 
         view()->composer('user*', function ($view) {
             $view->with('balance', '100$');
         });
+
+        Paginator::useBootstrapFive();
     }
 }
