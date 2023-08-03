@@ -34,7 +34,8 @@ class BlogController extends Controller
         //$blogs = Blog::query()->limit(10)->offset()->get(['id', 'title' , 'published_at']);
         //$blogs = Blog::query()->paginate(12, ['id', 'title' , 'published_at']); 
 
-        $blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']); //->orderBy('', 'asc/desc')
+        //latest = ->orderBy('', 'asc/desc')
+        $blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']);
 
         return view('blog.index', compact('blogs'));
     }
@@ -67,7 +68,7 @@ class BlogController extends Controller
             'published' => $validated['published'] ?? false,
 
         ]);
-        dd($blog);*/
+        */
         for ($i=0; $i<99 ; $i++) { 
             Blog::query()->create([
                 'user_id' => User::query()->value('id'),
@@ -79,13 +80,10 @@ class BlogController extends Controller
         }
         return redirect()->route('blogs.show', 1);
     }
-    public function show($blog){
-        $blog = [
-            'id' => 1,
-            'title' => 'War',
-            'content' =>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ad.'
-        ];
-        $blogs = array_fill(0,10,$blog);
+    public function show(Request $request,Blog $blog){
+        //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
+        //$blog = Blog::query()->chunk/chunkById(10, function...);
+        
         return view('blog.show', compact('blog'));
     }
     public function edit($blog){

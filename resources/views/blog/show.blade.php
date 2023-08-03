@@ -2,7 +2,7 @@
 
 @section('main.content')
     <x-title>
-        {{$blog['title']}}
+        {{$blog->title}}
         <x-slot name='link'>
             <a href="{{route('blogs')}}">
                 {{__('List blogs')}}
@@ -10,12 +10,12 @@
         </x-slot>
 
         <x-slot name="right">
-            <x-button-link href="{{ route('blog.edit', $blog['id']) }}">
+            <x-button-link href="{{ route('blog.edit', $blog->id) }}">
                 {{ __('Edit') }}
             </x-button-link>
         </x-slot>
     </x-title>
     <div>
-        {!! $blog['content'] !!}
+        {!! $blog->content !!}
     </div>
 @endsection
