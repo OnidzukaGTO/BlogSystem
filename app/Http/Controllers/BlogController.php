@@ -4,14 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
     public function index(Request $request){
-        $search = $request->input('search');
-        $category_id = $request->input('category_id');
+        $validate = $request->validate([
+            'search' => ['nullable', 'string', 'max:50'],
+            'from_date' => ['nullable', 'string', 'date'],
+            'to_date' => ['nullable', 'string', 'date', 'after:from_date'],
+            'tag' => ['nullable', 'string', 'max:10'],
+        ]);
+        $query = Blog::query();
+
+        if ($search = $validate['search'] ?? null) {
+            $query->where('title', 'like', "%{$search}%");
+        }
+        if ($from_date = $validate['from_date'] ?? null) {
+            $query->where('published_at', '>=', new Carbon($from_date));
+        }
+        if ($to_date = $validate['to_date'] ?? null) {
+            $query->where('published_at', '<=', new Carbon($to_date));
+        }
+        if ($tag = $validate['tag'] ?? null) {
+            $query->whereJsonContains('tags', $tag);
+        }
+
+        $blogs = $query->latest('published_at')
+        ->where('published', true)
+        ->whereNotNull('published_at')
+        ->paginate(12);
 
         //dd($search,$category_id);
         /*$blog = [
@@ -22,6 +45,7 @@ class BlogController extends Controller
         ];*/
 
         /*$blogs = array_fill(0,10,$blog);
+
         $blogs = array_filter($blogs, function ($blog) use ($search, $category_id){
             if ($search && ! str_contains(strtolower($blog['title']), strtolower($search))) {
                 return false;
@@ -37,12 +61,9 @@ class BlogController extends Controller
 
         //latest = ->orderBy('', 'asc/desc')
         //$blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']);
-        $blogs = Blog::query()
-            ->where('published', true)
-            ->whereNotNull('published_at')
-            ->paginate(12);
         return view('blog.index', compact('blogs'));
     }
+
     public function create(){
         return view('blog.create');
     }

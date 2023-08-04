@@ -16,7 +16,7 @@
     @include('blog.filter')
 
 <div class="text-center">
-    @if (empty($blogs))
+    @if ($blogs->isEmpty())
         {{__('No blogs')}}
     @else
         <div class="row">
