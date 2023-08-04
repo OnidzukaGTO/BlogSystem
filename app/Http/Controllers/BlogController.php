@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
@@ -35,8 +36,11 @@ class BlogController extends Controller
         //$blogs = Blog::query()->paginate(12, ['id', 'title' , 'published_at']); 
 
         //latest = ->orderBy('', 'asc/desc')
-        $blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']);
-
+        //$blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']);
+        $blogs = Blog::query()
+            ->where('published', true)
+            ->whereNotNull('published_at')
+            ->paginate(12);
         return view('blog.index', compact('blogs'));
     }
     public function create(){
@@ -83,7 +87,6 @@ class BlogController extends Controller
     public function show(Request $request,Blog $blog){
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
-        
         return view('blog.show', compact('blog'));
     }
     public function edit($blog){
