@@ -16,6 +16,6 @@ class Currency extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'name','price','active','sort',
+        'id','name',
     ];
 }

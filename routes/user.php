@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\commentcontroller;
+use App\Http\Controllers\DonateController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user') ->middleware('active') -> group(function(){
@@ -14,4 +15,6 @@ Route::prefix('user') ->middleware('active') -> group(function(){
     Route::put('blogs/{blog}/like',[BlogController::class, 'like']) -> name('blogs.like');
     Route::delete('blogs/{blog}',[BlogController::class, 'delete']) -> name('blogs.delete');
     Route::resource('blogs/{blog}/comments', commentcontroller::class) ->only(['index', 'store']);
+
+    Route::get('donates', DonateController::class)->name('donates');
 });
