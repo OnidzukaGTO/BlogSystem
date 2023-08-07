@@ -16,22 +16,22 @@
     <x-card-body>
         <x-form action="{{route('register.store')}}" method="POST">
             <x-form-item>
-                <x-label require>{{__('Name')}}</x-label>
+                <x-label required>{{__('Name')}}</x-label>
                 <x-input name="name" autofocus />
             </x-form-item>
 
             <x-form-item>
-                <x-label require>{{__('Email')}}</x-label>
+                <x-label required>{{__('Email')}}</x-label>
                 <x-input type="email" name="email" />
             </x-form-item>
 
             <x-form-item>
-                <x-label require>{{__('Password')}}</x-label>
+                <x-label required>{{__('Password')}}</x-label>
                 <x-input type="password" name="password" />
             </x-form-item>
 
             <x-form-item>
-                <x-label>{{__('Password Confirmation')}}</x-label>
+                <x-label required>{{__('Password Confirmation')}}</x-label>
                 <x-input type="Password" name="password_confirmation" />
             </x-form-item>
 

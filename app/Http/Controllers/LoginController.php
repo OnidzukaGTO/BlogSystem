@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
@@ -20,15 +21,22 @@ class LoginController extends Controller
         //return response()->json(['foo' => 'bar'], 200, []);
 
         
-        
-        $email = $request->input('email');
-        $password = $request->input('password');
+        $data = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
         $remember = $request->boolean('remember');
 
+        if (Auth::attempt($data)){
+            $request->session()->regenerate();
+
+            return redirect()->intended('blogs');
+        }
         /*if (true) {
             return redirect()->back()->withInput();
         }*/
-        session(['alert'=> __('Welcome User')]);
-        return redirect()->route('blogs');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }

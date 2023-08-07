@@ -6,7 +6,7 @@
             </a>
         </h2>
         <div class="small text-muted">
-            {{$blog->published_at->diffForHumans()}}
+            {{$blog->published_at?->diffForHumans()}}
         </div>
     </x-card-body>
 </x-card>

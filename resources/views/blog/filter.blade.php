@@ -1,5 +1,5 @@
 <x-form method="GET" action="{{route('blogs')}}">
-    <div class="row">
+    <div class="row border-bottom pb-3 mb-4">
         <div class="col-12 col-md-4">
             <div class="mb-3">
                 <x-input name="search" value="{{request('search')}}" placeholder="{{__('Filter')}}" />
