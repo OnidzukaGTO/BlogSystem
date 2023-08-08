@@ -27,9 +27,11 @@ class LoginController extends Controller
         ]);
         $remember = $request->boolean('remember');
 
+        if (Auth::attempt([$data, 'admin' => 1])) {
+            return redirect('admin.index');
+        }
         if (Auth::attempt($data)){
             $request->session()->regenerate();
-
             return redirect()->intended('blogs');
         }
         /*if (true) {

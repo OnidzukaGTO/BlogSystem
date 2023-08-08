@@ -21,6 +21,12 @@
             {{__('Blog')}}
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{route('profile', $id)}}">
+            {{__('My profile')}}
+            </a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

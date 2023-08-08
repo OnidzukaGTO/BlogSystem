@@ -110,12 +110,7 @@ class BlogController extends Controller
         //$blog = Blog::query()->chunk/chunkById(10, function...);
         return view('blog.show', compact('blog'));
     }
-    public function edit($blog){
-        $blog = [
-            'id' => 1,
-            'title' => 'War',
-            'content' =>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ad.'
-        ];
+    public function edit(Blog $blog){
         return view('blog.edit', compact('blog'));
     }
     public function update(Request $request, $blog){
