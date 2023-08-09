@@ -5,12 +5,6 @@
 @section('main.content')
     <x-title>
         {{__('List blogs')}}
-
-        <x-slot name="right">
-            <x-button-link href="{{ route('blog.create') }}">
-                {{ __('Create Blog') }}
-            </x-button-link>
-        </x-slot>
     </x-title>
 
     @include('blog.filter')

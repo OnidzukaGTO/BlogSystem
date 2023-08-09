@@ -23,7 +23,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{{route('profile', $id)}}">
+            <a class="nav-link {{ active_link('profile*')}}" aria-current="page" href="{{route('profile')}}">
             {{__('My profile')}}
             </a>
           </li>

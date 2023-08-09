@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -36,14 +37,7 @@ class BlogController extends Controller
         ->whereNotNull('published_at')
         ->paginate(12);
 
-        //dd($search,$category_id);
-        /*$blog = [
-            'id' => 1,
-            'title' => 'War',
-            'content' =>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ad.',
-            'category_id' => 1
-        ];*/
-
+        
         /*$blogs = array_fill(0,10,$blog);
 
         $blogs = array_filter($blogs, function ($blog) use ($search, $category_id){
@@ -84,8 +78,8 @@ class BlogController extends Controller
             ]);
         }*/
 
-        /*$blog = Blog::query()->firstOrCreate([
-            'user_id' => User::query()->value('id'),
+        $blog = Blog::query()->firstOrCreate([
+            'user_id' => Auth::id(),
             'title' => $validated['title'],
         ], [
             'content' => $validated['content'],
@@ -93,8 +87,8 @@ class BlogController extends Controller
             'published' => $validated['published'] ?? false,
 
         ]);
-        */
-        for ($i=0; $i<99 ; $i++) { 
+        
+        /*for ($i=0; $i<99 ; $i++) { 
             Blog::query()->create([
                 'user_id' => User::query()->value('id'),
                 'title' => fake()->sentence(),
@@ -102,8 +96,8 @@ class BlogController extends Controller
                 'published' => true,
                 'published_at' => fake()-> dateTimeBetween(now()->subYear(), now()),
             ]);
-        }
-        return redirect()->route('blogs.show', 1);
+        }*/
+        return redirect()->route('blogs.show', $blog->id);
     }
     public function show(Request $request,Blog $blog){
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
@@ -113,13 +107,21 @@ class BlogController extends Controller
     public function edit(Blog $blog){
         return view('blog.edit', compact('blog'));
     }
-    public function update(Request $request, $blog){
+    public function update(Request $request,Blog $blog){
+
         $validate=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
+            'published_at' => ['nullable', 'string', 'date'],
+            'published' => ['nullable', 'boolean'],
         ])->validate();
 
-        dd($validate);
+        $blog->fill([
+            'title' => $validate['title'],
+            'content' => $validate['content'],
+            'published_at' => new Carbon($validate['published_at']) ?? null,
+            'published' => $validate['published'] ?? false,
+        ])->save();
         return redirect()->back();
     }
     public function delete($blog){

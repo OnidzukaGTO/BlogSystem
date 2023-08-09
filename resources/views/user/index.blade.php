@@ -1,9 +1,19 @@
 @extends('layouts.main')
 
+@section('page.title', 'Profile')
+
 @section('main.content')
-<x-title>
-    {{__('List blogs')}}
-</x-title>
+    <x-title>
+        <h1>
+            {{$user->name}}
+        </h1>
+
+        <x-slot name="right">
+            <x-button-link href="{{ route('blog.create') }}">
+                {{ __('Create Blog') }}
+            </x-button-link>
+        </x-slot>
+    </x-title>
 
 <div class="text-center">
     @if (empty($blogs))
@@ -18,3 +28,4 @@
     </div>
     @endif
 </div>
+@endsection

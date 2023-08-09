@@ -7,7 +7,7 @@
         {{ __('Edit blog') }}
 
         <x-slot name="link">
-            <a href="{{ route('blogs.show', $blog['id']) }}">
+            <a href="{{ route('blogs.show', $blog->id) }}">
                 {{ __('Blog back') }}
             </a>
         </x-slot>

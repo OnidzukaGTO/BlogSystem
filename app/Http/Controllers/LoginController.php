@@ -25,14 +25,15 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
+
         $remember = $request->boolean('remember');
 
-        if (Auth::attempt([$data, 'admin' => 1])) {
-            return redirect('admin.index');
-        }
         if (Auth::attempt($data)){
+            if (Auth::attempt(['admin' => 1])) {
+                return redirect('admin.index');
+            }
             $request->session()->regenerate();
-            return redirect()->intended('blogs');
+            return redirect()->intended('user/blogs');
         }
         /*if (true) {
             return redirect()->back()->withInput();
