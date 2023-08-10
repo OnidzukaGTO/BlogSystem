@@ -18,7 +18,7 @@ class BlogController extends Controller
             'tag' => ['nullable', 'string', 'max:10'],
         ]);
         $query = Blog::query();
-
+        
         if ($search = $validate['search'] ?? null) {
             $query->where('title', 'like', "%{$search}%");
         }
@@ -36,7 +36,6 @@ class BlogController extends Controller
         ->where('published', true)
         ->whereNotNull('published_at')
         ->paginate(12);
-
         
         /*$blogs = array_fill(0,10,$blog);
 
@@ -100,9 +99,12 @@ class BlogController extends Controller
         return redirect()->route('blogs.show', $blog->id);
     }
     public function show(Request $request,Blog $blog){
+        $user = User::query()
+        ->where('id', $blog->user_id)
+        ->first();
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
-        return view('blog.show', compact('blog'));
+        return view('blog.show', compact('blog', 'user'));
     }
     public function edit(Blog $blog){
         return view('blog.edit', compact('blog'));

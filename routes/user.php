@@ -20,4 +20,5 @@ Route::prefix('user') ->middleware('active') -> group(function(){
     Route::resource('blogs/{blog}/comments', Commentcontroller::class) ->only(['index', 'store']);
 
     Route::get('donates', DonateController::class)->name('donates');
+    Route::get('exite', [UserController::class, 'logout'])->name('logout');
 });

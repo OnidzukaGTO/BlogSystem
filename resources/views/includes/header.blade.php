@@ -29,6 +29,15 @@
           </li>
         </ul>
 
+        @if (Auth::check())
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{route('logout')}}">
+              {{__('Logout')}}
+            </a>
+          </li>
+        </ul>  
+        @else
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link {{ active_link('register')}}" aria-current="page" href="{{route('register')}}">
@@ -41,7 +50,9 @@
               {{__('Login')}}
             </a>
           </li>
-        </ul>
+        </ul>  
+        @endif
+
       </div>
     </div> 
   </nav>

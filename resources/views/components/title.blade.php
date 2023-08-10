@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-between">
         <div>
-            <h1 class="h2 m-0">
+            <h1 class="h2 m-0 text-break" style="max-width: 90%">
                 {{ $slot }}
             </h1>
         </div>
@@ -19,6 +19,10 @@
             </div>
         @endisset
     </div>
+
+    @isset($author)
+        {{$author}}
+    @endisset
 </div>
 
 <x-errors />

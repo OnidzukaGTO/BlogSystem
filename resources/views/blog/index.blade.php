@@ -24,5 +24,4 @@
         {{$blogs->links()}}
     @endif
 </div>
-
 @endsection
