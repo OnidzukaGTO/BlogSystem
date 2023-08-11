@@ -8,11 +8,13 @@
             {{$user->name}}
         </h1>
 
+        @if ($user->id == Auth::id())
         <x-slot name="right">
             <x-button-link href="{{ route('blog.create') }}">
                 {{ __('Create Blog') }}
             </x-button-link>
         </x-slot>
+        @endif
     </x-title>
 
 <div class="text-center">

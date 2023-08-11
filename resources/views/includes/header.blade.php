@@ -22,11 +22,13 @@
             </a>
           </li>
 
+          @if (Auth::check())
           <li class="nav-item">
-            <a class="nav-link {{ active_link('profile*')}}" aria-current="page" href="{{route('profile')}}">
+            <a class="nav-link {{ active_link('profile')}}" aria-current="page" href="{{route('profile', Auth::id())}}">
             {{__('My profile')}}
             </a>
           </li>
+          @endif
         </ul>
 
         @if (Auth::check())

@@ -1,3 +1,5 @@
+@props(['blog' => ''] )
+
 <div class="border-bottom pb-3 mb-4">
 
     @isset($link)
@@ -8,7 +10,7 @@
 
     <div class="d-flex justify-content-between">
         <div>
-            <h1 class="h2 m-0 text-break" style="max-width: 90%">
+            <h1 class="h2 m-0 text-break" style="max-width: 600px">
                 {{ $slot }}
             </h1>
         </div>
@@ -21,7 +23,7 @@
     </div>
 
     @isset($author)
-        {{$author}}
+            {{$author}}
     @endisset
 </div>
 
