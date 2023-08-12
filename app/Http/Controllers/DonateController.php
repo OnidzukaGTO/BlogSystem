@@ -10,7 +10,7 @@ class DonateController extends Controller
 {
     public function __invoke()
     {
-        for ($i=0; $i <10; $i++) {
+        /*for ($i=0; $i <10; $i++) {
             $currencies = Currency::query()->where('id', '=', 'BTC')->first();
             Donate::query()->forceCreate([
                 'created_at' => now()->subDays(rand(0, 1000)),

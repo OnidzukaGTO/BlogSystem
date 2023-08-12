@@ -11,7 +11,7 @@ Route::prefix('user') ->group(function(){
         Route::get('profile/{id}', [UserController::class, 'index'])->name('profile');
         Route::get('blogs/create',[BlogController::class, 'create']) -> name('blog.create');
         Route::post('blogs',[BlogController::class, 'store']) -> name('blogs.store');
-        Route::get('blogs/{blog}/edit',[BlogController::class, 'edit']) -> name('blog.edit');
+        Route::get('blogs/{blog}/edit',[BlogController::class, 'edit'])-> name('blog.edit');
         Route::put('blogs/{blog}',[BlogController::class, 'update']) -> name('blog.update');
         Route::put('blogs/{blog}/like',[BlogController::class, 'like']) -> name('blogs.like');
         Route::delete('blogs/{blog}',[BlogController::class, 'delete']) -> name('blogs.delete');

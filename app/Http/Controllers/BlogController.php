@@ -107,7 +107,10 @@ class BlogController extends Controller
         return view('blog.show', compact('blog', 'user'));
     }
     public function edit(Blog $blog){
-        return view('blog.edit', compact('blog'));
+        if (Auth::id() == $blog->user_id) {
+            return view('blog.edit', compact('blog'));
+        }
+        return redirect()->back();
     }
     public function update(Request $request,Blog $blog){
 
