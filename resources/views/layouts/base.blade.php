@@ -7,6 +7,12 @@
     <title>@yield('page.title', config('app.name'))</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <style>
+    .items-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;}
     .container{ max-width: 720px; }
     .required:after { content: '*'; color: red; margin-left: 3px}
     </style>

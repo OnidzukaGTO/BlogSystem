@@ -1,6 +1,6 @@
 <x-card>
     <x-card-body>
-        <h2 class="h6">
+        <h2 class="h6 items-text">
             <a href="{{route('blogs.show', $blog->id)}}">
                 {{$blog->title}}
             </a>
