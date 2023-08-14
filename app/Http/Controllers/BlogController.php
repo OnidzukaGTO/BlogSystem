@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -36,7 +37,8 @@ class BlogController extends Controller
         ->where('published', true)
         ->whereNotNull('published_at')
         ->paginate(12);
-        
+
+        $users_names = DB::select('select id, name from users ');
         /*$blogs = array_fill(0,10,$blog);
 
         $blogs = array_filter($blogs, function ($blog) use ($search, $category_id){
@@ -54,7 +56,7 @@ class BlogController extends Controller
 
         //latest = ->orderBy('', 'asc/desc')
         //$blogs = Blog::query()->latest('published_at')->paginate(12, ['id', 'title' , 'published_at']);
-        return view('blog.index', compact('blogs'));
+        return view('blog.index', compact('blogs', 'users_names'));
     }
 
     public function create(){

@@ -5,13 +5,13 @@
         {{$blog->title}}
 
         <x-slot name="author">
-            <a href="{{route('profile',$blog->user_id)}}">
+            <a class="profile" href="{{route('profile',$blog->user_id)}}">
                 By {{$user->name}}
             </a>
         </x-slot>
 
         <x-slot name='link'>
-            <a href="{{route('blogs')}}">
+            <a class="profile" href="{{route('blogs')}}">
                 {{__('List blogs')}}
             </a>
         </x-slot>

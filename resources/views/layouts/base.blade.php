@@ -7,6 +7,13 @@
     <title>@yield('page.title', config('app.name'))</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <style>
+    a.profile{
+        text-decoration: none;
+    }
+    a:hover.profile{
+        text-decoration: underline;
+        color: black;
+    }
     .items-text {
 	overflow: hidden;
 	text-overflow: ellipsis;

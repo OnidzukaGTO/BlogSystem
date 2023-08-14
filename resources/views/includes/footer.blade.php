@@ -1,5 +1,5 @@
-<footer class="py-3 border-top text-center bg-dark">
-    <p class="m-0 text-white-50">
-        @ {{config('app.name')}} {{$date}}   
-    </p> {{-- $date - глобальная переменная с AppServiceProvider --}}
-</footer>
+<footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50">
+    <div class="container text-center">
+        @ {{config('app.name')}} {{$date}} 
+    </div>
+  </footer>
