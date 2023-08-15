@@ -7,10 +7,13 @@
     <title>@yield('page.title', config('app.name'))</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <style>
-    a.profile{
+    body{
+        background-color: rgb(234, 235, 247)
+    }
+    a{
         text-decoration: none;
     }
-    a:hover.profile{
+    a:hover{
         text-decoration: underline;
         color: black;
     }

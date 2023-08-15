@@ -24,7 +24,9 @@
         </x-slot>
         @endif
     </x-title>
+
     <div>
         {!! $blog->content !!}
     </div>
+    
 @endsection
