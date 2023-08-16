@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\Commentcontroller;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DonateController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -14,8 +14,10 @@ Route::prefix('user') ->group(function(){
         Route::get('blogs/{blog}/edit',[BlogController::class, 'edit'])-> name('blog.edit');
         Route::put('blogs/{blog}',[BlogController::class, 'update']) -> name('blog.update');
         Route::put('blogs/{blog}/like',[BlogController::class, 'like']) -> name('blogs.like');
-        Route::delete('blogs/{blog}',[BlogController::class, 'delete']) -> name('blogs.delete');
-        Route::resource('blogs/{blog}/comments', Commentcontroller::class) ->only(['index', 'store']);
+        Route::delete('blogs/{blog}/delete',[BlogController::class, 'delete']) -> name('blog.delete');
+
+        Route::post('blogs/{blog}', [CommentController::class, 'store'])->name('comment');
+        //Route::resource('blogs/{blog}/comments', Commentcontroller::class) ->only(['index', 'store']);
 
         Route::get('exite', [UserController::class, 'logout'])->name('logout');
     });

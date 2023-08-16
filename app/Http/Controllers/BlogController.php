@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class BlogController extends Controller
             'to_date' => ['nullable', 'string', 'date', 'after:from_date'],
             'tag' => ['nullable', 'string', 'max:10'],
         ]);
+
         $query = Blog::query();
         
         if ($search = $validate['search'] ?? null) {
@@ -62,6 +64,7 @@ class BlogController extends Controller
     public function create(){
         return view('blog.create');
     }
+
     public function store(Request $request){
         //$title = $request->input('title');
         //$content = $request->input('content');
@@ -100,22 +103,28 @@ class BlogController extends Controller
         }*/
         return redirect()->route('blogs.show', $blog->id);
     }
+
     public function show(Request $request,Blog $blog){
         $user = User::query()
         ->where('id', $blog->user_id)
         ->first();
+
+        $comments = Comment::query()
+        ->where('blog_id', $blog->id)
+        ->get();
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
-        return view('blog.show', compact('blog', 'user'));
+        return view('blog.show', compact('blog', 'user', 'comments'));
     }
+
     public function edit(Blog $blog){
         if (Auth::id() == $blog->user_id) {
             return view('blog.edit', compact('blog'));
         }
         return redirect()->back();
     }
-    public function update(Request $request,Blog $blog){
 
+    public function update(Request $request,Blog $blog){
         $validate=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
@@ -131,7 +140,12 @@ class BlogController extends Controller
         ])->save();
         return redirect()->back();
     }
-    public function delete($blog){
-        return redirect()->route('blogs');
+    public function delete(Blog $blog){
+        if (Auth::id() == $blog->user_id) {
+            DB::table('comments')->where('blog_id', $blog->id)->delete();
+            DB::table('blogs')->where('id', $blog->id)->delete();
+            return redirect()->route('blogs');
+        }
+        return redirect()->back();
     }
 }

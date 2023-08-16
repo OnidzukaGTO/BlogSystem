@@ -9,7 +9,6 @@ class Blog extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'user_id', 'title', 'content', 'published','published_at',
     ];
@@ -18,4 +17,5 @@ class Blog extends Model
         'published_at' => 'datetime',
         'published'=> 'boolean',
     ];
+
 }
