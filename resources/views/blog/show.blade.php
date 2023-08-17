@@ -22,7 +22,7 @@
                 {{ __('Edit') }}
             </x-button-link>
 
-            <form action="{{ route('blog.delete', $blog->id)}}" method="POST">
+            <form class="d-inline" action="{{ route('blog.delete', $blog->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">
@@ -44,11 +44,13 @@
     <div class="pt-1 pb-4">
         <x-form action="{{route('comment', $blog->id)}}" method="post">
             <x-input name="content" type="text" placeholder="Comment" />
-            <x-button class="mt-3" type="submit">Popka Egora</x-button>
+            <x-button class="mt-3" type="submit">Published</x-button>
         </x-form>
     </div>
-
-    @foreach ($comments as $comment)
+    @if ($comments->isEmpty())
+        {{__('No Comments')}}
+    @else
+        @foreach ($comments as $comment)
         <div class="d-flex justify-content-between row m-2 card text-center">
             <div class="col">
                 {{$comment->content}}
@@ -58,6 +60,7 @@
                 {{$comment->created_at}}
             </div>
         </div>
-    @endforeach
+        @endforeach  
+    @endif
 
 @endsection

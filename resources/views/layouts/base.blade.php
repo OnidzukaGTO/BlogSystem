@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <style>
     body{
-        background-color: rgb(234, 235, 247)
+        background-color: rgb(234, 235, 247);
     }
     a{
         text-decoration: none;

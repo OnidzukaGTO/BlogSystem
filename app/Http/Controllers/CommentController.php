@@ -13,6 +13,8 @@ class CommentController extends Controller
         $validate = $request->validate([
             'content' => ['required', 'string']
         ]);
+
+        auth()->blog()->
         $comment = Comment::query()->create([
             'blog_id' => $blog->id,
             'user_id' => Auth::id(),

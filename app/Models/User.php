@@ -20,7 +20,7 @@ class User extends Authenticatable
     //protected $table = 'name table';
 
     protected $fillable = [
-        'name','email','avatar','active','password','id'
+        'name','email','avatar','active','password'
     ];
 
     /**
@@ -32,4 +32,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

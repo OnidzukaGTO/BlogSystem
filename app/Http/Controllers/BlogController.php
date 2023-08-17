@@ -141,6 +141,8 @@ class BlogController extends Controller
         return redirect()->back();
     }
     public function delete(Blog $blog){
+        //$i = Auth::user()->blogs()->first()->comments()->get();
+
         if (Auth::id() == $blog->user_id) {
             DB::table('comments')->where('blog_id', $blog->id)->delete();
             DB::table('blogs')->where('id', $blog->id)->delete();

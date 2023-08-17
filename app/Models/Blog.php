@@ -10,12 +10,18 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'content', 'published','published_at',
+        'title', 'content', 'published','published_at',
     ];
 
     protected $casts=[
         'published_at' => 'datetime',
         'published'=> 'boolean',
     ];
-
+    
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }
