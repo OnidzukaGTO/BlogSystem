@@ -10,7 +10,7 @@
 
     <div class="d-flex justify-content-between">
         <div>
-            <h1 class="h2 m-0 text-break" style="max-width: 600px">
+            <h1 class="h2 m-0 text-break" style="max-width: 550px">
                 {{ $slot }}
             </h1>
         </div>

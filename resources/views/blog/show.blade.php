@@ -47,6 +47,7 @@
             <x-button class="mt-3" type="submit">Published</x-button>
         </x-form>
     </div>
+
     @if ($comments->isEmpty())
         {{__('No Comments')}}
     @else
@@ -58,6 +59,7 @@
             <div class="col small text-muted">
             Create comment:
                 {{$comment->created_at}}
+                
             </div>
         </div>
         @endforeach  
