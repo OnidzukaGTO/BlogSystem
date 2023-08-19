@@ -57,9 +57,15 @@
                 {{$comment->content}}
             </div>
             <div class="col small text-muted">
-            Create comment:
-                {{$comment->created_at}}
-                
+                <div class="d-flex justify-content-between">
+                    Create comment:
+                    {{$comment->created_at}}
+                    <div>
+                        <a href="{{route('profile', $comment->user_id)}}">
+                            {{author_comment("$comment->user_id")}}
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         @endforeach  

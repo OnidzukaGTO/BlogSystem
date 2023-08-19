@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
@@ -33,6 +32,7 @@ class LoginController extends Controller
                 return redirect('admin.index');
             }
             $request->session()->regenerate();
+
             return redirect()->intended('user/blogs');
         }
         /*if (true) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -38,6 +39,10 @@ class RegisterController extends Controller
             'email' => $validate['email'],
             'password' => bcrypt($validate['password']),
         ]);
-        return redirect()->route('blogs');
+
+        $user_id = User::query()->where('email', $user['email'])->first();
+        Auth::loginUsingId($user_id->id);
+        $request->session()->regenerate();
+        return redirect()->intended("user/blogs");
     }
 }
