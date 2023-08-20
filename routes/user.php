@@ -17,6 +17,7 @@ Route::prefix('user') ->group(function(){
         Route::delete('blogs/{blog}/delete',[BlogController::class, 'delete']) -> name('blog.delete');
 
         Route::post('blogs/{blog}', [CommentController::class, 'store'])->name('comment');
+        Route::delete('blogs/{blog}/{comment}/delete', [CommentController::class, 'delete'])->name('comment.delete');
         //Route::resource('blogs/{blog}/comments', Commentcontroller::class) ->only(['index', 'store']);
 
         Route::get('exite', [UserController::class, 'logout'])->name('logout');

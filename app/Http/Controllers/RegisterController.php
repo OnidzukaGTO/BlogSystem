@@ -43,6 +43,6 @@ class RegisterController extends Controller
         $user_id = User::query()->where('email', $user['email'])->first();
         Auth::loginUsingId($user_id->id);
         $request->session()->regenerate();
-        return redirect()->intended("user/blogs");
+        return redirect()->intended("user/profile/$user_id->id");
     }
 }

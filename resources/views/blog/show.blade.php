@@ -54,7 +54,18 @@
         @foreach ($comments as $comment)
         <div class="d-flex justify-content-between row m-2 card text-center">
             <div class="col">
-                {{$comment->content}}
+                        <div id="flex-container">
+                            <div class="flex-item" id="flex">{{$comment->content}}</div>
+                            @if (Auth::id() == $comment->user_id)
+                            <div class="raw-item" id="raw">
+                                <form action="{{route('comment.delete', [$blog->id, $comment->id])}}" method = "POST">
+                                @csrf
+                                @method('DELETE')
+                                <button style="color: red" type="submit" class="btn btn-link">Delete</button>
+                                </form>
+                            </div>
+                            @endif
+                          </div>                          
             </div>
             <div class="col small text-muted">
                 <div class="d-flex justify-content-between">

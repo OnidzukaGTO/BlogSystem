@@ -7,6 +7,22 @@
     <title>@yield('page.title', config('app.name'))</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <style>
+    #flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+
+    #flex-container > .flex-item {
+      -webkit-flex: auto;
+      flex: auto;
+    }
+
+    #flex-container > .raw-item {
+        width: 4rem;
+    }
+
     body{
         background-color: rgb(234, 235, 247);
     }

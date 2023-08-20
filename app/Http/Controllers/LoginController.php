@@ -32,8 +32,8 @@ class LoginController extends Controller
                 return redirect('admin.index');
             }
             $request->session()->regenerate();
-
-            return redirect()->intended('user/blogs');
+            $id = Auth::id();
+            return redirect()->intended("user/profile/$id");
         }
         /*if (true) {
             return redirect()->back()->withInput();
