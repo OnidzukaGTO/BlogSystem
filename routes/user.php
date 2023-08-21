@@ -15,6 +15,7 @@ Route::prefix('user') ->group(function(){
         Route::put('blogs/{blog}',[BlogController::class, 'update']) -> name('blog.update');
         Route::put('blogs/{blog}/like',[BlogController::class, 'like']) -> name('blogs.like');
         Route::delete('blogs/{blog}/delete',[BlogController::class, 'delete']) -> name('blog.delete');
+        Route::delete('profile/{user}/delete',[UserController::class, 'delete']) -> name('user.delete');
 
         Route::post('blogs/{blog}', [CommentController::class, 'store'])->name('comment');
         Route::delete('blogs/{blog}/{comment}/delete', [CommentController::class, 'delete'])->name('comment.delete');

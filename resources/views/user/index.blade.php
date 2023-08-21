@@ -13,6 +13,13 @@
             <x-button-link href="{{ route('blog.create') }}">
                 {{ __('Create Blog') }}
             </x-button-link>
+            <form class="mt-3" action="{{route('user.delete', $user)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">
+                    {{ __('Delete Account') }}
+                </button>
+            </form>
         </x-slot>
         @endif
     </x-title>

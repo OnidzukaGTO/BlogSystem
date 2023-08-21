@@ -28,4 +28,11 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+    public function delete(User $user){
+        if (Auth::id() == $user->id) {
+            DB::table('users')->where('id', $user->id)->delete();
+            return redirect()->route('home');
+        }
+        return redirect()->back();
+    }
 }
