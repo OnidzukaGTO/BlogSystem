@@ -33,10 +33,29 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $withCount = ['like'];
+
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /*protected $appends = ['likesCount'];
+
+    public function getlikesCountAttribute()
+    {
+        return $this->likes()->count();
+    }*/
+
     public function blogs(){
         return $this->hasMany(Blog::class);
     }
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Blog::class, 'likes')->withPivot('is_dislike')->withTimestamps();
     }
 }

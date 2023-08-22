@@ -9,6 +9,13 @@ class Blog extends Model
 {
     use HasFactory;
 
+    protected $withCount = ['like'];
+
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+    
     protected $fillable = [
         'title', 'content', 'published','published_at',
     ];
@@ -23,5 +30,10 @@ class Blog extends Model
     }
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes')->withPivot('is_dislike')->withTimestamps();
     }
 }

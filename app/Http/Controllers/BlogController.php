@@ -108,7 +108,7 @@ class BlogController extends Controller
         $user = User::query()
         ->where('id', $blog->user_id)
         ->first();
-
+        
         $comments = Comment::query()
         ->where('blog_id', $blog->id)
         ->get();

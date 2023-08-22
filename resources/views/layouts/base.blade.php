@@ -43,6 +43,7 @@
     .required:after { content: '*'; color: red; margin-left: 3px}
     </style>
     @stack('css')
+    <script src="https://kit.fontawesome.com/96b0d861f6.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="d-flex flex-column justify-content-between min-vh-100">

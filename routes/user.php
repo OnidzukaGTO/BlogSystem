@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DonateController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,7 @@ Route::prefix('user') ->group(function(){
         Route::post('blogs',[BlogController::class, 'store']) -> name('blogs.store');
         Route::get('blogs/{blog}/edit',[BlogController::class, 'edit'])-> name('blog.edit');
         Route::put('blogs/{blog}',[BlogController::class, 'update']) -> name('blog.update');
-        Route::put('blogs/{blog}/like',[BlogController::class, 'like']) -> name('blogs.like');
+        Route::post('blogs/{blogId}/like',[LikeController::class, 'like']) -> name('blogs.like');
         Route::delete('blogs/{blog}/delete',[BlogController::class, 'delete']) -> name('blog.delete');
         Route::delete('profile/{user}/delete',[UserController::class, 'delete']) -> name('user.delete');
 
