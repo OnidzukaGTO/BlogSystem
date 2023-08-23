@@ -25,6 +25,7 @@
                 @endforeach
             </div>
             @endif
+            @auth
             <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">
                 @csrf
                 <button type="submit" class="border-0 bg-transparent">
@@ -33,11 +34,21 @@
                 @else
                     <i class="fa-regular fa-heart"></i>
                 @endif
-                </button>
                 <span>
                     {{$blog->like->count()}}
                 </span>
+                </button>
             </form>
+            @endauth
+
+            @guest
+            <div>
+                <i class="fa-regular fa-heart"></i>
+                <span>
+                    {{$blog->like->count()}}
+                </span>
+            </div>
+            @endguest
         </div>
     </x-card-body>
 </x-card>

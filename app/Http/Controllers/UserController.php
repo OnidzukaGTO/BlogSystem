@@ -22,6 +22,21 @@ class UserController extends Controller
         ->paginate(12); 
         return view('user.index', compact('user', 'blogs'));
     }
+
+    public function liked($id){
+        $blogs = Blog::query()->latest('published_at')
+        ->where('published', true)
+        ->whereNotNull('published_at')
+        ->paginate(12);
+
+        $users = Auth::user()->like;
+            dd($users->join('blogs', "blogs.id", 'blog_id'));
+            //dd($blog->join('likes', 'blog_id', "$user->blog_id")->get());
+        
+
+        return view('user.liked', compact('blogs', 'users'));
+    }
+
     public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();

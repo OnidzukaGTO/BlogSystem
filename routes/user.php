@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user') ->group(function(){
     Route::middleware('auth', 'active')->group(function(){
-        Route::get('profile/{id}', [UserController::class, 'index'])->name('profile');
         Route::get('blogs/create',[BlogController::class, 'create']) -> name('blog.create');
         Route::post('blogs',[BlogController::class, 'store']) -> name('blogs.store');
         Route::get('blogs/{blog}/edit',[BlogController::class, 'edit'])-> name('blog.edit');
         Route::put('blogs/{blog}',[BlogController::class, 'update']) -> name('blog.update');
-        Route::post('blogs/{blogId}/like',[LikeController::class, 'like']) -> name('blogs.like');
         Route::delete('blogs/{blog}/delete',[BlogController::class, 'delete']) -> name('blog.delete');
+
+        Route::get('profile/{id}', [UserController::class, 'index'])->name('profile');
+        Route::get('profile/{id}/liked', [UserController::class, 'liked'])->name('profile.liked');
         Route::delete('profile/{user}/delete',[UserController::class, 'delete']) -> name('user.delete');
+        Route::post('blogs/{blogId}/like',[LikeController::class, 'like']) -> name('blogs.like');
 
         Route::post('blogs/{blog}', [CommentController::class, 'store'])->name('comment');
         Route::delete('blogs/{blog}/{comment}/delete', [CommentController::class, 'delete'])->name('comment.delete');
