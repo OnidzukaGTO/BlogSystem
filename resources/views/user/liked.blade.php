@@ -12,11 +12,11 @@
 <div class="text-center">
     @if (empty($blogs))
         {{__('No blogs')}}
-        @else      
+    @else      
         <div class="row">
         @foreach ($blogs as $blog)
         <div class="col-12 col-md-4">
-            <x-blog.card :blog="$blog" />
+            <x-blog.card :users="$users_names" :blog="$blog" />
         </div>   
         @endforeach
     </div>
