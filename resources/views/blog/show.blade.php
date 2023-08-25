@@ -33,16 +33,49 @@
         @endif
     </x-title>
 
-    <div>
+    <div class="mb-5">
         {!! $blog->content !!}
     </div>
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-inner">
+            @if (json_decode($blog->file))
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              </div>
+            @foreach (json_decode($blog->file) as $url)
+            @if ($flag)
+            <div class="carousel-item active">
+                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
+            </div>
+            @else
+            <div class="carousel-item">
+                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
+            </div>
+            @endif
+            {{$flag = !$flag}}
+            @endforeach
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+                
+            @else
+                <img src="{{$url}}" class="d-block w-100" alt="...">
+            @endif
+      </div>
 
     @auth
     <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">
         @csrf
         <button type="submit" class="border-0 bg-transparent">
         @if (auth()->user()->likes->contains($blog->id))
-            <i class="fa-solid fa-heart"></i>       
+        <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>    
         @else
             <i class="fa-regular fa-heart"></i>
         @endif

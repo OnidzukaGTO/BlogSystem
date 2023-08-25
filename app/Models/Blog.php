@@ -17,7 +17,7 @@ class Blog extends Model
     }
     
     protected $fillable = [
-        'title', 'content', 'published','published_at',
+        'title', 'content', 'published','published_at', 'file', 'user_id'
     ];
 
     protected $casts=[

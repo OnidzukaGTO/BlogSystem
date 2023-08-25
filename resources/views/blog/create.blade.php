@@ -12,7 +12,7 @@
             </a>
         </x-slot>
     </x-title>
-    <x-blog.form action="{{route('blogs.store')}}">
+    <x-blog.form enctype="multipart/form-data" action="{{route('blogs.store')}}">
         <x-button type="submit">
             {{ __('Create blog') }}
         </x-button>

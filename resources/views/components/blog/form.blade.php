@@ -16,6 +16,12 @@
     </x-form-item>
 
     <x-form-item>
+        <x-label required>{{ __('Picture') }}</x-label>
+        <x-input type="file" name="file[]" multiple value="{{ $blog['file'] ?? '' }}" />
+        <x-error name="file"/>
+    </x-form-item>
+
+    <x-form-item>
         <x-label required>{{ __('Date Published') }}</x-label>
         <x-input name="published_at" placeholder="dd.mm.yyyy" />
         <x-error name="published_at"/>

@@ -20,3 +20,4 @@ if (!function_exists('author_comment')) {
         //return DB::select("SELECT name FROM users WHERE id = $user_id");
     }
 }
+

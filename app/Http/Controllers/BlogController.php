@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -72,15 +73,20 @@ class BlogController extends Controller
         $validated=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
-            'published_at' => ['nullable', 'string', 'date'],
+            'file.*' => ['nullable', 'image:jpg, jpeg, png','max:2048'],
+            'published_at' => ['nullable', 'string', 'date'],   
             'published' => ['nullable', 'boolean'],
         ])->validate();
-       
+
         /* if (true) {
             throw ValidationException::withMessages([
                 'account' => __('Error')
             ]);
         }*/
+        foreach ($validated['file'] as $file) {
+            $file = Storage::put('images', $file);
+            $files[]= $file;
+        }
 
         $blog = Blog::query()->firstOrCreate([
             'user_id' => Auth::id(),
@@ -89,8 +95,9 @@ class BlogController extends Controller
             'content' => $validated['content'],
             'published_at' => new Carbon($validated['published_at'] ?? null),
             'published' => $validated['published'] ?? false,
-
+            'file' => json_encode($files)
         ]);
+
         
         /*for ($i=0; $i<99 ; $i++) { 
             Blog::query()->create([
@@ -112,9 +119,19 @@ class BlogController extends Controller
         $comments = Comment::query()
         ->where('blog_id', $blog->id)
         ->get();
+
+        $url = asset('storage/'.$blog->file);
+
+        if (json_decode($blog->file)) {
+            foreach (json_decode($blog->file) as $url) {
+                $url = asset('storage/'.$url);
+            }
+        }
+        $flag = true;
+        //$url = Storage::url($blog->file);
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
-        return view('blog.show', compact('blog', 'user', 'comments'));
+        return view('blog.show', compact('blog', 'user', 'comments', 'url', 'flag'));
     }
 
     public function edit(Blog $blog){

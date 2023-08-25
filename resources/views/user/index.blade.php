@@ -7,7 +7,10 @@
         <h1>
             {{$user->name}}
         </h1>
-
+        <h5>
+            <a href="{{route('profile.liked', $user->id)}}" style="color: #d90d0d;">My Liked Blogs</a>
+            <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>
+        </h5>
         @if ($user->id == Auth::id())
         <x-slot name="right">
             <x-button-link href="{{ route('blog.create') }}">

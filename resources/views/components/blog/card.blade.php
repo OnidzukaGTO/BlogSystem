@@ -30,7 +30,7 @@
                 @csrf
                 <button type="submit" class="border-0 bg-transparent">
                 @if (auth()->user()->likes->contains($blog->id))
-                    <i class="fa-solid fa-heart"></i>       
+                <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>       
                 @else
                     <i class="fa-regular fa-heart"></i>
                 @endif
