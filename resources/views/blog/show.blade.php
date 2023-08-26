@@ -39,31 +39,30 @@
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-inner">
             @if (json_decode($blog->file))
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              </div>
             @foreach (json_decode($blog->file) as $url)
-            @if ($flag)
-            <div class="carousel-item active">
-                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
-            </div>
-            @else
+            @if ($counter < $count_pict-1)
             <div class="carousel-item">
                 <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
             </div>
+            @else
+            <div class="carousel-item active">
+                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
+            </div>
+            {{$counter = 0;}}
             @endif
-            {{$flag = !$flag}}
+            {{$counter++;}}
             @endforeach
         </div>
+        @if ($count_pict > 1)
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        @endif
                 
             @else
                 <img src="{{$url}}" class="d-block w-100" alt="...">

@@ -13,7 +13,7 @@
         </x-slot>
     </x-title>
 
-    <x-blog.form action="{{route('blog.update', $blog['id'])}}" method="POST" :blog="$blog" >
+    <x-blog.form enctype="multipart/form-data" action="{{route('blog.update', $blog['id'])}}" method="POST" :blog="$blog" >
         @method('PUT')
         <x-button type="submit">
             {{ __('Edit blog') }}

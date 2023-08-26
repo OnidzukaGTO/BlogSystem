@@ -22,7 +22,6 @@ class BlogController extends Controller
         ]);
 
         $query = Blog::query();
-        
         if ($search = $validate['search'] ?? null) {
             $query->where('title', 'like', "%{$search}%");
         }
@@ -120,18 +119,16 @@ class BlogController extends Controller
         ->where('blog_id', $blog->id)
         ->get();
 
-        $url = asset('storage/'.$blog->file);
 
-        if (json_decode($blog->file)) {
-            foreach (json_decode($blog->file) as $url) {
-                $url = asset('storage/'.$url);
-            }
+        $count_pict = (count(json_decode($blog->file)));
+        foreach (json_decode($blog->file) as $url) {
+            $url = asset('storage/'.$url);
         }
-        $flag = true;
+        $counter = 0;
         //$url = Storage::url($blog->file);
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
-        return view('blog.show', compact('blog', 'user', 'comments', 'url', 'flag'));
+        return view('blog.show', compact('blog', 'user', 'comments', 'url', 'counter', 'count_pict'));
     }
 
     public function edit(Blog $blog){
@@ -141,26 +138,42 @@ class BlogController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request,Blog $blog){
+    public function update(Request $request, Blog $blog){
         $validate=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
+            'file.*' => ['nullable', 'image:jpg, jpeg, png','max:2048'],
             'published_at' => ['nullable', 'string', 'date'],
             'published' => ['nullable', 'boolean'],
+            
         ])->validate();
+
+        if (!empty($validate['file'])) {
+            foreach ($validate['file'] as $file) {
+                $file = Storage::put('images', $file);
+                $files[]= $file;
+            }
+        }
+        else {
+            foreach (json_decode($blog->file) as $file) {
+                $files[]= $file;
+            }
+        }
 
         $blog->fill([
             'title' => $validate['title'],
             'content' => $validate['content'],
             'published_at' => new Carbon($validate['published_at']) ?? null,
             'published' => $validate['published'] ?? false,
+            'file' => json_encode($files) 
         ])->save();
-        return redirect()->back();
+        return redirect()->route('blogs.show',$blog->id);
     }
     public function delete(Blog $blog){
         //$i = Auth::user()->blogs()->first()->comments()->get();
 
         if (Auth::id() == $blog->user_id) {
+            Storage::delete(json_decode($blog->file));
             DB::table('comments')->where('blog_id', $blog->id)->delete();
             DB::table('blogs')->where('id', $blog->id)->delete();
             return redirect()->route('blogs');
