@@ -33,23 +33,26 @@
         @endif
     </x-title>
 
-    <div class="mb-5">
+    <div>
         {!! $blog->content !!}
     </div>
-    <div id="carouselExampleIndicators" class="carousel slide">
+    @if (json_decode($blog->file))
+    <div id="carouselExampleIndicators" class="carousel slide mt-5">
         <div class="carousel-inner">
-            @if (json_decode($blog->file))
+
             @foreach (json_decode($blog->file) as $url)
             @if ($counter < $count_pict-1)
             <div class="carousel-item">
                 <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
             </div>
+
             @else
             <div class="carousel-item active">
                 <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
             </div>
             {{$counter = 0;}}
             @endif
+
             {{$counter++;}}
             @endforeach
         </div>
@@ -63,11 +66,8 @@
             <span class="visually-hidden">Next</span>
           </button>
         @endif
-                
-            @else
-                <img src="{{$url}}" class="d-block w-100" alt="...">
-            @endif
       </div>
+      @endif
 
     @auth
     <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">

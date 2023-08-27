@@ -9,6 +9,15 @@
         </h2>
     </div>
     <x-card-body>
+        @if ($blog->file !== "null")
+        @foreach (json_decode($blog->file) as $url)
+        <div class="mb-3">
+            <img src="{{asset('storage/'.$url)}}" width="150" height="130" alt="">
+        </div>
+        @break
+        @endforeach
+        @endif
+
         <div class="d-flex justify-content-between row">
             <div class="col small text-muted">
                 {{$blog->published_at?->diffForHumans()}}
@@ -25,6 +34,7 @@
                 @endforeach
             </div>
             @endif
+            
             @auth
             <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">
                 @csrf

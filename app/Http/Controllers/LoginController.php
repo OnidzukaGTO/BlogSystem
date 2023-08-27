@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         $remember = $request->boolean('remember');
 
-        if (Auth::attempt($data)){
+        if (Auth::attempt($data, $remember)){
             if (Auth::attempt(['admin' => 1])) {
                 return redirect('admin.index');
             }

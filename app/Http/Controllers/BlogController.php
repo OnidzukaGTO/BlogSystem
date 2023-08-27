@@ -40,6 +40,7 @@ class BlogController extends Controller
         ->whereNotNull('published_at')
         ->paginate(12);
 
+        
         $users_names = DB::select('select id, name from users ');
         /*$blogs = array_fill(0,10,$blog);
 
@@ -82,9 +83,14 @@ class BlogController extends Controller
                 'account' => __('Error')
             ]);
         }*/
-        foreach ($validated['file'] as $file) {
-            $file = Storage::put('images', $file);
-            $files[]= $file;
+        if (!empty($validated['file'])) {
+            foreach ($validated['file'] as $file) {
+                $file = Storage::put('images', $file);
+                $files[]= $file;
+            }
+        }
+        else {
+            $files = null;
         }
 
         $blog = Blog::query()->firstOrCreate([
@@ -120,11 +126,19 @@ class BlogController extends Controller
         ->get();
 
 
-        $count_pict = (count(json_decode($blog->file)));
-        foreach (json_decode($blog->file) as $url) {
-            $url = asset('storage/'.$url);
+        if ($blog->file !== "null") {
+            $count_pict = (count(json_decode($blog->file)));
+            foreach (json_decode($blog->file) as $url) {
+                $url = asset('storage/'.$url);
+            }
+            $counter = 0;
         }
-        $counter = 0;
+        else{
+            $url = null;
+            $counter = null;
+            $count_pict = null;
+        }
+        
         //$url = Storage::url($blog->file);
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);
@@ -173,7 +187,9 @@ class BlogController extends Controller
         //$i = Auth::user()->blogs()->first()->comments()->get();
 
         if (Auth::id() == $blog->user_id) {
-            Storage::delete(json_decode($blog->file));
+            if (!isset($blog->file)) {
+                Storage::delete(json_decode($blog->file));
+            }
             DB::table('comments')->where('blog_id', $blog->id)->delete();
             DB::table('blogs')->where('id', $blog->id)->delete();
             return redirect()->route('blogs');
