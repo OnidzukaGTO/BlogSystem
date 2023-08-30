@@ -10,13 +10,29 @@ Blogs System - This is my project in the form of news blogs with the creation of
 composer install
 ```
 3. Configure the `.env` file with the options from the file `.env.example`
-4. Execute the migration with the command:
+4. Generate a new Application Key in Laravel:
+```bash
+php artisan key:generate
+```
+5. Execute the migration with the command:
 ```bash
 php artisan migrate
 ```
+6. We launch the project using the command:
+```bash
+php artisan serve
+```
+## Configuration
+Working with the database is done through MySQL and SQLite.
+To configure the project, edit the `.env` file and set the following parameters:
+
+- `DB_HOST`: Database host
+- `DB_USERNAME`: Database username
+- `DB_PASSWORD`: Database password
+
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://instagram.com/kudravyj?igshid=NTc4MTIwNjQ2YQ==).
 
 ## Contact
 
