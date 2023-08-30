@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /*Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            /*$table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->foreignId('user_id');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('published')->default(true);
             $table->timestamp('published_at')->nullable();
             
-        });*/
+        });
     }
 
     /**
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //Schema::dropIfExists('blogs');
+        Schema::dropIfExists('blogs');
     }
 };
