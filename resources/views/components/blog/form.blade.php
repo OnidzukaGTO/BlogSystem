@@ -27,11 +27,5 @@
         <x-error name="published_at"/>
     </x-form-item>
 
-    <x-form-item>
-        <x-checkbox name="published">
-            {{__('Published')}}
-        </x-checkbox>
-    </x-form-item>
-
     {{$slot}}
 </x-form>

@@ -75,7 +75,6 @@ class BlogController extends Controller
             'content' => ['required', 'string'],
             'file.*' => ['nullable', 'image:jpg, jpeg, png','max:2048'],
             'published_at' => ['nullable', 'string', 'date'],   
-            'published' => ['nullable', 'boolean'],
         ])->validate();
 
         /* if (true) {
@@ -99,7 +98,7 @@ class BlogController extends Controller
         ], [
             'content' => $validated['content'],
             'published_at' => new Carbon($validated['published_at'] ?? null),
-            'published' => $validated['published'] ?? false,
+            'published' => true,
             'file' => json_encode($files)
         ]);
 
