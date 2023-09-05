@@ -73,7 +73,7 @@ class BlogController extends Controller
         $validated=validator($request->all(),[
             'title' => ['required', 'string','max:100'],
             'content' => ['required', 'string'],
-            'file.*' => ['nullable', 'image:jpg, jpeg, png','max:2048'],
+            'file.*' => ['nullable', 'image:jpg, jpeg, png','max:4048'],
             'published_at' => ['nullable', 'string', 'date'],   
         ])->validate();
 

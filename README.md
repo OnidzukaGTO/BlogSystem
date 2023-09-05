@@ -18,7 +18,11 @@ php artisan key:generate
 ```bash
 php artisan migrate
 ```
-6. We launch the project using the command:
+6. Create a symbolic link to display blog images.
+```bash
+php artisan storage:link
+```
+7. We launch the project using the command:
 ```bash
 php artisan serve
 ```
