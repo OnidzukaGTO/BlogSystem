@@ -12,7 +12,7 @@
         @if ($blog->file !== "null")
         @foreach (json_decode($blog->file) as $url)
         <div class="mb-3">
-            <img src="{{asset('storage/'.$url)}}" width="150" height="130" alt="">
+            <img src="{{asset($url)}}" width="150" height="130" alt="img">
         </div>
         @break
         @endforeach

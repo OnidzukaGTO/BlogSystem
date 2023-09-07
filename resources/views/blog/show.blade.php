@@ -43,12 +43,12 @@
             @foreach (json_decode($blog->file) as $url)
             @if ($counter < $count_pict-1)
             <div class="carousel-item">
-                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
+                <img src="{{asset($url)}}" class="d-block w-100" alt="...">
             </div>
 
             @else
             <div class="carousel-item active">
-                <img src="{{asset('storage/'.$url)}}" class="d-block w-100" alt="...">
+                <img src="{{asset($url)}}" class="d-block w-100" alt="...">
             </div>
             {{$counter = 0;}}
             @endif

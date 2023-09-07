@@ -84,7 +84,7 @@ class BlogController extends Controller
         }*/
         if (!empty($validated['file'])) {
             foreach ($validated['file'] as $file) {
-                $file = Storage::put('images', $file);
+                $file = Storage::put('images', $file,);
                 $files[]= $file;
             }
         }
@@ -186,7 +186,7 @@ class BlogController extends Controller
         //$i = Auth::user()->blogs()->first()->comments()->get();
 
         if (Auth::id() == $blog->user_id) {
-            if (!isset($blog->file)) {
+            if ($blog->file !== 'null') {
                 Storage::delete(json_decode($blog->file));
             }
             DB::table('comments')->where('blog_id', $blog->id)->delete();

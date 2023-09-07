@@ -1,5 +1,5 @@
 <x-form method="GET" action="{{route('blogs')}}">
-    <div class="d-flex justify-content-between row border-bottom pb-3 mb-3" style="width: 750px">
+    <div class="d-flex justify-content-between row border-bottom pb-3 mb-3" style="max-width: 750px">
 
         <div class="col-md-6">
             <div class="mb-3">
