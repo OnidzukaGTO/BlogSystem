@@ -70,19 +70,17 @@
       @endif
 
     @auth
-    <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">
-        @csrf
-        <button type="submit" class="border-0 bg-transparent">
+        <button onclick="like()" class="border-0 bg-transparent">
         @if (auth()->user()->likes->contains($blog->id))
-        <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>    
+            <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>    
         @else
             <i class="fa-regular fa-heart"></i>
         @endif
         </button>
-        <span>
+        
+        <span id="like">
             {{$blog->like->count()}}
         </span>
-    </form>
     @endauth
 
     <h4 class="pt-2">
@@ -130,4 +128,15 @@
         @endforeach  
     @endif
 
+    <script>
+        let url = "{!! route('blogs.like', ["$blog->id"]) !!}";
+        let element = document.getElementById("like");
+        async function like() {
+            await fetch(url).then(response => update(response));
+        }
+        async function update(is_like) {
+            let count = await is_like.json() ? parseInt(element.textContent) + 1 : parseInt(element.textContent) - 1
+            element.textContent = count.toString();
+        }
+    </script>
 @endsection
