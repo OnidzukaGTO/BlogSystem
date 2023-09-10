@@ -34,22 +34,8 @@
                 @endforeach
             </div>
             @endif
-            
-            @auth
-            <form class="mt-4 pe-0" action="{{route('blogs.like', ["$blog->id"])}}" method="POST">
-                @csrf
-                <button type="submit" class="border-0 bg-transparent">
-                @if (auth()->user()->likes->contains($blog->id))
-                <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>       
-                @else
-                    <i class="fa-regular fa-heart"></i>
-                @endif
-                <span>
-                    {{$blog->like->count()}}
-                </span>
-                </button>
-            </form>
-            @endauth
+
+            <x-blog.like :blog="$blog" />
 
             @guest
             <div>

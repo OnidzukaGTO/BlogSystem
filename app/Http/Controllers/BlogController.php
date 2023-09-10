@@ -137,7 +137,6 @@ class BlogController extends Controller
             $counter = null;
             $count_pict = null;
         }
-        
         //$url = Storage::url($blog->file);
         //$blog = Blog::query()->oldest('id')->firstOrFail(['id', 'title']);
         //$blog = Blog::query()->chunk/chunkById(10, function...);

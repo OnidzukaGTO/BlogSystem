@@ -10,6 +10,7 @@ class LikeController extends Controller
     public function like($blogId){
         $user = User::findOrFail(Auth::id());
         $user->likes()->toggle($blogId);
-        return redirect()->back();
+        $data = (boolean)$user->likes()->where('id', '=', $blogId)->first();
+        return response()->json($data)->header('Content-Type', 'application/json');
     }
 }

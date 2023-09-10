@@ -69,19 +69,9 @@
       </div>
       @endif
 
-    @auth
-        <button onclick="like()" class="border-0 bg-transparent">
-        @if (auth()->user()->likes->contains($blog->id))
-            <i class="fa-solid fa-heart" style="color: #d90d0d;"></i>    
-        @else
-            <i class="fa-regular fa-heart"></i>
-        @endif
-        </button>
-        
-        <span id="like">
-            {{$blog->like->count()}}
-        </span>
-    @endauth
+
+    <x-blog.like :blog="$blog" />
+
 
     <h4 class="pt-2">
         Comments
@@ -127,16 +117,4 @@
         </div>
         @endforeach  
     @endif
-
-    <script>
-        let url = "{!! route('blogs.like', ["$blog->id"]) !!}";
-        let element = document.getElementById("like");
-        async function like() {
-            await fetch(url).then(response => update(response));
-        }
-        async function update(is_like) {
-            let count = await is_like.json() ? parseInt(element.textContent) + 1 : parseInt(element.textContent) - 1
-            element.textContent = count.toString();
-        }
-    </script>
 @endsection

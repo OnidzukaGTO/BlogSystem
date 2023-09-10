@@ -18,7 +18,7 @@ Route::prefix('user') ->group(function(){
         Route::get('profile/{id}', [UserController::class, 'index'])->name('profile');
         Route::get('profile/{id}/liked', [UserController::class, 'liked'])->name('profile.liked');
         Route::delete('profile/{user}/delete',[UserController::class, 'delete']) -> name('user.delete');
-        Route::post('blogs/{blogId}/like',[LikeController::class, 'like']) -> name('blogs.like');
+        Route::get('blogs/{blogId}/like',[LikeController::class, 'like']) -> name('blogs.like');
 
         Route::post('blogs/{blog}', [CommentController::class, 'store'])->name('comment');
         Route::delete('blogs/{blog}/{comment}/delete', [CommentController::class, 'delete'])->name('comment.delete');
