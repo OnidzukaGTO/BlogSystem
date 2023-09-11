@@ -39,7 +39,6 @@ class BlogController extends Controller
         ->where('published', true)
         ->whereNotNull('published_at')
         ->paginate(12);
-
         
         $users_names = DB::select('select id, name from users ');
         /*$blogs = array_fill(0,10,$blog);
