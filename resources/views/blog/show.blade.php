@@ -33,11 +33,11 @@
         @endif
     </x-title>
 
-    <div>
+    <div class="mb-4">
         {!! $blog->content !!}
     </div>
     @if (json_decode($blog->file))
-    <div id="carouselExampleIndicators" class="carousel slide mt-5">
+    <div id="carouselExampleIndicators" class="carousel slide mt-5 mb-4">
         <div class="carousel-inner">
 
             @foreach (json_decode($blog->file) as $url)
@@ -91,7 +91,11 @@
         <div class="d-flex justify-content-between row m-2 card text-center">
             <div class="col">
                         <div id="flex-container">
-                            <div class="flex-item" id="flex">{{$comment->content}}</div>
+                            <div class="flex-item" id="flex">
+                                <p class="text-break">
+                                    {{$comment->content}}
+                                </p>
+                            </div>
                             @if (Auth::id() == $comment->user_id)
                             <div class="raw-item" id="raw">
                                 <form action="{{route('comment.delete', [$blog->id, $comment->id])}}" method = "POST">

@@ -15,7 +15,11 @@
             <img src="{{asset($url)}}" width="150" height="130" alt="img">
         </div>
         @break
-        @endforeach
+        @endforeach            
+        @else
+        <div class="mb-3">
+            <img src="{{asset('images/no_image.jpg')}}" width="150" height="130" alt="img">
+        </div>
         @endif
 
         <div class="d-flex justify-content-between row">

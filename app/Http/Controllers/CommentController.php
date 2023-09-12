@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function store(Request $request, Blog $blog){
         $validate = $request->validate([
-            'content' => ['required', 'string']
+            'content' => ['required', 'string', 'max:200']
         ]);
 
         //dd(Auth::user()->blogs()->find($blog->id));
