@@ -146,6 +146,7 @@ class BlogController extends Controller
         if (Auth::id() == $blog->user_id) {
             return view('blog.edit', compact('blog'));
         }
+
         return redirect()->back();
     }
 
@@ -159,6 +160,7 @@ class BlogController extends Controller
             
         ])->validate();
 
+
         if (!empty($validate['file'])) {
             foreach ($validate['file'] as $file) {
                 $file = Storage::put('images', $file);
@@ -166,19 +168,17 @@ class BlogController extends Controller
             }
         }
         else {
-            foreach (json_decode($blog->file) as $file) {
-                $files[]= $file;
-            }
+            $files = null;
         }
 
         $blog->fill([
             'title' => $validate['title'],
             'content' => $validate['content'],
             'published_at' => new Carbon($validate['published_at']) ?? null,
-            'published' => $validate['published'] ?? false,
+            'published' => true,
             'file' => json_encode($files) 
         ])->save();
-        return redirect()->route('blogs.show',$blog->id);
+        return redirect()->route('blogs.show', $blog->id);
     }
     public function delete(Blog $blog){
         //$i = Auth::user()->blogs()->first()->comments()->get();

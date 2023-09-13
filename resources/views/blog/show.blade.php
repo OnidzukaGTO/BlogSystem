@@ -33,11 +33,11 @@
         @endif
     </x-title>
 
-    <div class="mb-4">
+    <div class="mb-1">
         {!! $blog->content !!}
     </div>
     @if (json_decode($blog->file))
-    <div id="carouselExampleIndicators" class="carousel slide mt-5 mb-4">
+    <div id="carouselExampleIndicators" class="carousel slide mt-5 mb-3">
         <div class="carousel-inner">
 
             @foreach (json_decode($blog->file) as $url)

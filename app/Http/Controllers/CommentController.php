@@ -16,11 +16,12 @@ class CommentController extends Controller
         ]);
 
         //dd(Auth::user()->blogs()->find($blog->id));
-        $comment = Comment::query()->create([
+        Comment::query()->create([
             'blog_id' => $blog->id,
             'user_id' => Auth::id(),
             'content' => $validate['content']
-        ]); 
+        ]);
+        
         return redirect()->back();
     }
 
