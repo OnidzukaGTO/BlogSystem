@@ -14,3 +14,4 @@ class LikeController extends Controller
         return response()->json($data)->header('Content-Type', 'application/json');
     }
 }
+вмы
