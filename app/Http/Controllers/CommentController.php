@@ -29,4 +29,6 @@ class CommentController extends Controller
         DB::table('comments')->where('id', $comment->id)->delete();
         return redirect()->back();
     }
+    
+    //vacation, last day
 }
