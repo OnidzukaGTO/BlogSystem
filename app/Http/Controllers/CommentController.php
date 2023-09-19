@@ -30,5 +30,5 @@ class CommentController extends Controller
         return redirect()->back();
     }
     
-    //vacation, last day
+    //Write to CV
 }
