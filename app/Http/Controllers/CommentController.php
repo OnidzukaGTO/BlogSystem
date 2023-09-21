@@ -30,5 +30,5 @@ class CommentController extends Controller
         return redirect()->back();
     }
     
-    //Write to CV
+    //Write to CV part2 :)
 }
