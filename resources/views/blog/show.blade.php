@@ -33,7 +33,7 @@
         @endif
     </x-title>
 
-    <div class="mb-1">
+    <div class="mb-1 text-break">
         {!! $blog->content !!}
     </div>
     @if (json_decode($blog->file))
